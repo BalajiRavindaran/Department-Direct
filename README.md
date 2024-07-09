@@ -11,4 +11,7 @@ Balaji Ravindaran (40275411)
 <li>
 [2024-07-08] -- Balaji -- Testing Project Management Tool(Jira) Integration -- Commit Test
 </li>
+<li>
+[2024-07-08] -- Balaji -- Testing Project Management Tool(Jira) Integration -- Branch Test
+</li>
 </ul>

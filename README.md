@@ -2,10 +2,13 @@
 
 <h2 color="red">Members :</h2>
 
-Balaji Ravindaran (40275411)  
+Balaji Ravindaran (40275411)
+
 Hanzhe Yang (40201362)
+
 Alexandre Panhaleux (ETS)
-Thierry Ntieupma (Udem)
+
+Thierry Ntieupma (UdeM)
 
 <h1></h1>
 

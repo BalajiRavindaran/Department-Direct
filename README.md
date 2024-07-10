@@ -5,6 +5,7 @@
 Balaji Ravindaran (40275411)  
 Hanzhe Yang (40201362)
 Alexandre Panhaleux (ETS)
+
 Thierry Ntieupma (Udem)
 
 <h1></h1>

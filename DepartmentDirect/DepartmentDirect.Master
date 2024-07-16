@@ -13,7 +13,6 @@
     <%--fontawesome css--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
 
-
     <%--jquery--%>
     <script src="bootstrap/js/jquery-3.3.1.slim.min.js"></script>
     <%--popper js--%>
@@ -31,58 +30,47 @@
 </head>
 
 <body>
-    <form id="form1" runat="server">
-        
+    <form id="form1" runat="server" style="display: flex; flex-direction: column; min-height: 100vh;">
         <div>
             <nav class="navbar navbar-dark">
                 <a class="navbar-brand nav-link" href="Home.aspx">
                     DepartmentDirect
                 </a>
-
                 <button class="navbar-toggler collapsed d-flex flex-column justify-content-around" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="toggler-icon top-bar"></span>
                     <span class="toggler-icon middle-bar"></span>
                     <span class="toggler-icon bottom-bar"></span>
                 </button>
-
-                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton4" runat="server">View Departments</asp:LinkButton>
                         </li>
-                        
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton1" runat="server">Student Login</asp:LinkButton>
                         </li>
-
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton2" runat="server">Sign Up</asp:LinkButton>
                         </li>
-
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton3" runat="server" Visible="False">Logout</asp:LinkButton>
                         </li>
-
                         <li class="nav-item active">
                             <asp:LinkButton class="nav-link" ID="LinkButton7" runat="server" Visible="False">Hello User</asp:LinkButton>
                         </li>
                     </ul>
                 </div>
-
-
             </nav>
         </div>
 
-
         <!-- Main Content Placeholder -->
-        <div>
+        <div style="flex: 1;">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
         <!-- Main Content Placeholder -->
 
-         <!-- Footer -->
+        <!-- Footer -->
         <footer>
             <div id="footer1" class="container-fluid">
                 <div class="row">

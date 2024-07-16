@@ -1,4 +1,12 @@
-﻿.footerlinks {
+﻿body {
+    margin: 0;
+    font-family: 'Gill Sans MT' !important;
+    display: grid;
+    background: #1a1c1d;
+    color: #ffffff;
+}
+
+.footerlinks {
     color: #ffffff;
     text-decoration: none !important;
 }

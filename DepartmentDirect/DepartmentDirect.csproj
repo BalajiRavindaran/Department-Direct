@@ -67,6 +67,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="adminLogin.aspx" />
+    <Content Include="assets\students.png" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
@@ -2120,11 +2122,21 @@
     <Content Include="fontawesome\svgs\solid\yin-yang.svg" />
     <Content Include="fontawesome\svgs\solid\z.svg" />
     <Content Include="home.aspx" />
+    <Content Include="studentLogin.aspx" />
+    <Content Include="studentSignup.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="adminLogin.aspx.cs">
+      <DependentUpon>adminLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="adminLogin.aspx.designer.cs">
+      <DependentUpon>adminLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DepartmentDirect.Master.cs">
       <DependentUpon>DepartmentDirect.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DepartmentDirect.Master.designer.cs">
       <DependentUpon>DepartmentDirect.Master</DependentUpon>
@@ -2137,6 +2149,20 @@
       <DependentUpon>home.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="studentLogin.aspx.cs">
+      <DependentUpon>studentLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="studentLogin.aspx.designer.cs">
+      <DependentUpon>studentLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="studentSignup.aspx.cs">
+      <DependentUpon>studentSignup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="studentSignup.aspx.designer.cs">
+      <DependentUpon>studentSignup.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fontawesome\less\brands.less" />

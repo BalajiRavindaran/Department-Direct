@@ -1,9 +1,8 @@
-﻿<%@ Page Title="login" Language="C#" MasterPageFile="~/DepartmentDirect.Master" AutoEventWireup="true" CodeBehind="studentLogin.aspx.cs" Inherits="DepartmentDirect.studentLogin" %>
+﻿<%@ Page Title="login" Language="C#" MasterPageFile="~/DepartmentDirect.Master" AutoEventWireup="true" CodeBehind="studentLogin.aspx.cs" Inherits="DepartmentDirect.studentLogin" Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <style>
         body {
             margin: 0;
@@ -23,6 +22,8 @@
         }
 
         .blink {
+            font-size: 20px;
+            color: red;
             animation: blinker 1.5s linear infinite;
         }
 
@@ -99,7 +100,7 @@
                                     <asp:Label ID="Label1" CssClass="blink" runat="server" Text="This is a text" Visible="False"></asp:Label></center>
                                 <br />
                                 <div class="form-group">
-                                    <asp:Button CssClass="btn btn-block login" ID="Button1" runat="server" Text="Login"/>
+                                    <asp:Button CssClass="btn btn-block login" ID="Button1" runat="server" Text="Login" OnClick="Button1_Click"/>
                                 </div>
                                 <div class="form-group">
                                     <a class="btn btn-dark btn-block" href="studentSignup.aspx">Sign Up</a>

@@ -15,8 +15,12 @@
         color: yellow;
     }
 
-#footer1 nav{
-    background: #912338;
+#footer1{
+    background-color: #912338;
+}
+
+nav{
+    background-color: #912338;
 }
 
 .navbar {

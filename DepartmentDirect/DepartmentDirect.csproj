@@ -2128,6 +2128,7 @@
     <Content Include="home.aspx" />
     <Content Include="studentLogin.aspx" />
     <Content Include="studentSignup.aspx" />
+    <Content Include="viewDepartments.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -2166,6 +2167,13 @@
     </Compile>
     <Compile Include="studentSignup.aspx.designer.cs">
       <DependentUpon>studentSignup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="viewDepartments.aspx.cs">
+      <DependentUpon>viewDepartments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="viewDepartments.aspx.designer.cs">
+      <DependentUpon>viewDepartments.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

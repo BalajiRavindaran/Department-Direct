@@ -1,11 +1,9 @@
-﻿<%@ Page Title="signup" Language="C#" MasterPageFile="~/DepartmentDirect.Master" AutoEventWireup="true" CodeBehind="studentSignup.aspx.cs" Inherits="DepartmentDirect.studentSignup" %>
+﻿<%@ Page Title="signup" Language="C#" MasterPageFile="~/DepartmentDirect.Master" AutoEventWireup="true" CodeBehind="studentSignup.aspx.cs" Inherits="DepartmentDirect.studentSignup" Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
     <style>
-
         body {
             margin: 0;
             min-height: 100vh;
@@ -32,6 +30,7 @@
         }
 
         .blink {
+            font-size: 20px;
             animation: blinker 1.5s linear infinite;
         }
 
@@ -119,11 +118,10 @@
                                 <div class="form-group">
                                     <asp:DropDownList CssClass="form-control" ID="DropDownList2" runat="server">
                                         <asp:ListItem Text="Select" Value="Select"/>
-                                        
-                                        <asp:ListItem Text="Co-Op Updates" Value="General User"/>
-                                        <asp:ListItem Text="Gina-Cody News" Value="Artist"/>
-                                        <asp:ListItem Text="Events" Value="Artist"/>
-                                        <asp:ListItem Text="All" Value="Artist"/>
+                                        <asp:ListItem Text="Co-Op Updates" Value="Co-Op Updates"/>
+                                        <asp:ListItem Text="Gina-Cody News" Value="Gina-Cody News"/>
+                                        <asp:ListItem Text="Events" Value="Events"/>
+                                        <asp:ListItem Text="All" Value="All"/>
                                     </asp:DropDownList>
                                 </div>
                             </div>
@@ -170,7 +168,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <asp:Button CssClass="btn btn-block signup" ID="Button1" runat="server" Text="Sign Up"/>
+                                    <asp:Button CssClass="btn btn-block signup" ID="Button1" runat="server" Text="Sign Up" OnClick="Button1_Click"/>
                                 </div>
                             </div>
                         </div>
@@ -185,6 +183,4 @@
             </div>
         </div>
     </div>
-
-
 </asp:Content>

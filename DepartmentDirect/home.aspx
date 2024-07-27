@@ -83,7 +83,6 @@
             </p>
             <p>
                 Join us today and experience a more connected and efficient academic environment with DepartmentDirect!
-           
             </p>
         </div>
     </div>

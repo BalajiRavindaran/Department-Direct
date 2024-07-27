@@ -35,7 +35,7 @@ namespace DepartmentDirect
 
                     try
                     {
-                        HttpResponseMessage response = await client.PostAsync("http://18.226.133.209:9090/departmentdirect/users/create", formData);
+                        HttpResponseMessage response = await client.PostAsync("http://3.128.202.148:9090/departmentdirect/users/create", formData);
                         string responseString = await response.Content.ReadAsStringAsync();
 
                         if (response.IsSuccessStatusCode)

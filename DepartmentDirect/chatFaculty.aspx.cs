@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace DepartmentDirect
 {
     public partial class chatFaculty : Page
@@ -28,3 +29,4 @@ namespace DepartmentDirect
         // Additional methods to handle receiving messages, connecting to WebSocket, etc.
     }
 }
+

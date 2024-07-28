@@ -36,7 +36,7 @@ namespace DepartmentDirect
             {
                 string departmentId = e.CommandArgument.ToString();
                 //Response.Redirect($"departmentChat.aspx?departmentId={departmentId}");
-                Response.Redirect("home.aspx");
+                Response.Redirect("chatFaculty.aspx");
             }
         }
     }

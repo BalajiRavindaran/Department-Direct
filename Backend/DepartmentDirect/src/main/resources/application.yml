@@ -1,0 +1,15 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /departmentdirect
+spring:
+  application:
+    name: departmentdirect
+
+  datasource:
+    url: jdbc:postgresql://18.118.126.254:5432/Departmentdirect
+    username: root
+    password: 1234
+
+    driver-class-name: org.postgresql.Driver
+

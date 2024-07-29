@@ -13,5 +13,16 @@ namespace DepartmentDirect
         {
 
         }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Label1.Text = "Reset Successful! Login to Access";
+            Label1.ForeColor = System.Drawing.Color.Green;
+            Label1.Visible = true;
+
+            string script = "setTimeout(function() { window.location = 'studentLogin.aspx'; }, 3000);"; // 1500 milliseconds = 1.5 seconds
+            ClientScript.RegisterStartupScript(this.GetType(), "Redirect", script, true);
+            //Response.Redirect("studentLogin.aspx");
+
+        }
     }
 }

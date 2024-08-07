@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace DepartmentDirect
 {
@@ -39,7 +41,7 @@ namespace DepartmentDirect
                         if (newpassword_1 == newpassword_2)
                         {
                             //update the password in the database
-
+                            UpdatePassword(studentId, newpassword_1);
 
                             Label1.Text = "Reset Successful! Login to Access";
                             Label1.ForeColor = System.Drawing.Color.Green;
@@ -60,11 +62,11 @@ namespace DepartmentDirect
 
                         }
 
-                      
+
                     }
                     else
                     {
-                        Label1.Text = "Reset failed! Password doesn't match ID";
+                        Label1.Text = "Reset failed! Password or ID is invalid";
                         Label1.ForeColor = System.Drawing.Color.Red;
                         Label1.Visible = true;
                         // Refresh the page after a short delay
@@ -78,25 +80,39 @@ namespace DepartmentDirect
                     Label1.Visible = true;
 
                     // Refresh the page after a short delay
-                    ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 10200);", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
                 }
             }
-
-
-
-
-
-
-
-
-            //Label1.Text = "Reset Successful! Login to Access";
-            //Label1.ForeColor = System.Drawing.Color.Green;
-            //Label1.Visible = true;
-
-            //string script = "setTimeout(function() { window.location = 'studentLogin.aspx'; }, 3000);"; // 1500 milliseconds = 1.5 seconds
-            //ClientScript.RegisterStartupScript(this.GetType(), "Redirect", script, true);
-            
-
         }
+        private void UpdatePassword(string studentId, string newPassword)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DepartmentDirectDB"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE Users SET Password = @NewPassword WHERE StudentId = @StudentId";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NewPassword", newPassword);
+                    command.Parameters.AddWithValue("@StudentId", studentId);
+
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Label1.Text = "Error updating password: " + ex.Message;
+                        Label1.ForeColor = System.Drawing.Color.Red;
+                        Label1.Visible = true;
+                    }
+                }
+            }
+        }
+
+
     }
+
 }

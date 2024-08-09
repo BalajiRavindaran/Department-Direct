@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Configuration;
+using System.Data.SqlClient;
 
 namespace DepartmentDirect
 {
@@ -13,5 +17,102 @@ namespace DepartmentDirect
         {
 
         }
+        protected async void Button1_Click(object sender, EventArgs e)
+        {
+            string studentId = TextBox1.Text;
+            string password = TextBox2.Text;
+            string newpassword_1 = TextBox3.Text;
+            string newpassword_2 = TextBox4.Text;
+
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // Construct the URL with query parameters
+                    string url = $"http://18.226.133.209:9090/departmentdirect/users/login?studentid={studentId}&password={password}";
+
+                    // Make the GET request
+                    HttpResponseMessage response = await client.GetAsync(url);
+                    string responseString = await response.Content.ReadAsStringAsync();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        if (newpassword_1 == newpassword_2)
+                        {
+                            //update the password in the database
+                            UpdatePassword(studentId, newpassword_1);
+
+                            Label1.Text = "Reset Successful! Login to Access";
+                            Label1.ForeColor = System.Drawing.Color.Green;
+                            Label1.Visible = true;
+
+
+                            Response.Redirect("studentLogin.aspx");
+                        }
+
+
+                        else
+                        {
+                            Label1.Text = "Reset Failed! New passwords must be same!";
+                            Label1.ForeColor = System.Drawing.Color.Red;
+                            Label1.Visible = true;
+                            // Refresh the page after a short delay
+                            ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
+
+                        }
+
+
+                    }
+                    else
+                    {
+                        Label1.Text = "Reset failed! Password or ID is invalid";
+                        Label1.ForeColor = System.Drawing.Color.Red;
+                        Label1.Visible = true;
+                        // Refresh the page after a short delay
+                        ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Label1.Text = "Reset failed: " + ex.Message;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Visible = true;
+
+                    // Refresh the page after a short delay
+                    ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
+                }
+            }
+        }
+        private void UpdatePassword(string studentId, string newPassword)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["DepartmentDirectDB"].ConnectionString;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "UPDATE Users SET Password = @NewPassword WHERE StudentId = @StudentId";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@NewPassword", newPassword);
+                    command.Parameters.AddWithValue("@StudentId", studentId);
+
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        Label1.Text = "Error updating password: " + ex.Message;
+                        Label1.ForeColor = System.Drawing.Color.Red;
+                        Label1.Visible = true;
+                    }
+                }
+            }
+        }
+
+
     }
+
 }

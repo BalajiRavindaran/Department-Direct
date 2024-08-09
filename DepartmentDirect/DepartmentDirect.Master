@@ -78,9 +78,9 @@
                         <p>
                             <asp:LinkButton class="footerlinks" ID="LinkButton6" runat="server" href="adminLogin.aspx">Admin Login</asp:LinkButton>
                             &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server" Visible="False">Analytics</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server" Visible="False" OnClick="LinkButton11_Click">Active Questions</asp:LinkButton>
                             &nbsp;
-                            <asp:LinkButton class="footerlinks" ID="LinkButton12" runat="server" Visible="False">Publish Notification</asp:LinkButton>
+                            <asp:LinkButton class="footerlinks" ID="LinkButton12" runat="server" Visible="False" OnClick="LinkButton12_Click">Publish Notification</asp:LinkButton>
                         </p>
                     </div>
                 </div>

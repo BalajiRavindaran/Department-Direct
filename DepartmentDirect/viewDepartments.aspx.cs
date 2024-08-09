@@ -19,10 +19,10 @@ namespace DepartmentDirect
             // Sample data, replace with actual data fetching logic
             var departments = new List<Department>
             {
-                new Department { Id = 1, Name = "Electrical Engineering", PreviousConversations = 85 },
-                new Department { Id = 2, Name = "Computer Engineering", PreviousConversations = 20 },
-                new Department { Id = 3, Name = "Co-Op Education", PreviousConversations = 70 },
-                new Department { Id = 4, Name = "Q&A General", PreviousConversations = 50 },
+                new Department { Id = 1, Name = "Electrical Engineering" },
+                new Department { Id = 2, Name = "Computer Engineering"},
+                new Department { Id = 3, Name = "Co-Op Education" },
+                new Department { Id = 4, Name = "General Questions" },
                 
             };
 
@@ -32,11 +32,33 @@ namespace DepartmentDirect
 
         protected void departmentRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            if (e.CommandName == "GoToChat")
+            string role = Session["Role"] as string;
+
+            if (role == "Student")
             {
-                string departmentId = e.CommandArgument.ToString();
-                //Response.Redirect($"departmentChat.aspx?departmentId={departmentId}");
-                Response.Redirect("chatFaculty.aspx");
+                if (e.CommandName == "GoToChat")
+                {
+                    string departmentId = e.CommandArgument.ToString();
+
+                    // Set the session variable for departmentId
+                    Session["DepartmentId"] = departmentId;
+
+                    // Redirect to chatStudent.aspx
+                    Response.Redirect("chatFaculty.aspx");
+                }
+            }
+            else if (role == "Staff")
+            {
+                if (e.CommandName == "GoToChat")
+                {
+                    string departmentId = e.CommandArgument.ToString();
+
+                    // Set the session variable for departmentId
+                    Session["DepartmentId"] = departmentId;
+
+                    // Redirect to chatFaculty.aspx
+                    Response.Redirect("activeStudents.aspx");
+                }
             }
         }
     }

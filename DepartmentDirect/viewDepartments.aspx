@@ -42,7 +42,6 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title title"><%# Eval("Name") %></h5>
-                                <h5 class="card-text">Previous Conversations: <%# Eval("PreviousConversations") %></h5>
                                 <asp:LinkButton runat="server" CssClass="btn btn-primary" CommandArgument='<%# Eval("Id") %>' CommandName="GoToChat">Go to Chat</asp:LinkButton>
                             </div>
                         </div>

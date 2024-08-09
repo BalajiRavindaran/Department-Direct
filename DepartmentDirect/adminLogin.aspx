@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col">
                                 <center>
-                                    <h1 class="title">Admin Login</h1>
+                                    <h1 class="title">Admin/Faculty Login</h1>
                                 </center>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                     <asp:Label ID="Label1" CssClass="blink" runat="server" Text="This is a text" Visible="False"></asp:Label></center>
                                 <br />
                                 <div class="form-group">
-                                    <asp:Button CssClass="btn btn-block login" ID="Button1" runat="server" Text="Login"/>
+                                    <asp:Button CssClass="btn btn-block login" ID="Button1" runat="server" Text="Login" OnClick="Button1_Click"/>
                                 </div>
 
                             </div>

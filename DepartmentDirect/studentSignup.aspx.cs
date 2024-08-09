@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace DepartmentDirect
 {
@@ -15,6 +18,8 @@ namespace DepartmentDirect
 
         protected async void Button1_Click(object sender, EventArgs e)
         {
+            if (Validation())
+            {
             string fullName = TextBox1.Text;
             string dob = TextBox2.Text;
             string email = TextBox3.Text;
@@ -57,6 +62,69 @@ namespace DepartmentDirect
                         Label1.Visible = true;
                     }
                 }
+            }
+            }
+        }
+
+        bool Validation()
+        {
+            bool containsInt = TextBox9.Text.Trim().Any(char.IsDigit);
+            var specialCharacters = new List<string> { "~", "'", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "+", "=", "{", "}", "[", "]", "|", "/", "?", "<", ">" };
+            bool containsSpecialCharacters = specialCharacters.Any(TextBox9.Text.Trim().Contains);
+
+
+            if (TextBox1.Text.Trim() == null || TextBox1.Text.Trim() == "")
+            {
+                Label1.Visible = true;
+                Label1.Text = "Full Name cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox2.Text.Trim() == null || TextBox2.Text.Trim() == "")
+            {
+                Label1.Visible = true;
+                Label1.Text = "Date Of Birth cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox3.Text.Trim() == null || TextBox3.Text.Trim() == "")
+            {
+                Label1.Visible = true;
+                Label1.Text = "Email cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (DropDownList2.SelectedItem.Value == "Select")
+            {
+                Label1.Visible = true;
+                Label1.Text = "Select your appropriate notification preference";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox8.Text.Trim() == null || TextBox8.Text.Trim() == "")
+            {
+                Label1.Visible = true;
+                Label1.Text = "Student ID cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox9.Text.Trim() == null || TextBox9.Text.Trim() == "")
+            {
+                Label1.Visible = true;
+                Label1.Text = "Password cannot be empty";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else if (TextBox9.Text.Trim().Length < 8 || containsInt == false || containsSpecialCharacters == false)
+            {
+                Label1.Visible = true;
+                Label1.Text = "Password too weak";
+                Label1.ForeColor = System.Drawing.Color.Red;
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

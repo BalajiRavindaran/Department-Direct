@@ -7,38 +7,76 @@ namespace DepartmentDirect
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!IsPostBack)
             {
-                if (Session["Role"] == null || !Session["Login"].Equals("True"))
+                try
                 {
-                    // User is not logged in
-                    LinkButton4.Visible = true; // ViewDepartment
-                    LinkButton1.Visible = true;  // Login
-                    LinkButton2.Visible = true;  // SignUp
-                    LinkButton3.Visible = false; // LogOut
-                    LinkButton7.Visible = false; // HelloUser
+                    // Check session values
+                    bool isLoggedIn = Session["Login"] != null && (bool)Session["Login"];
+                    string role = Session["Role"] as string;
 
-                    LinkButton6.Visible = true;  // AdminLogin
-                    LinkButton11.Visible = false; // ArtistLogin
-                    LinkButton12.Visible = false; // DepartmentLogin
+                    if (!isLoggedIn)
+                    {
+                        // User is not logged in
+                        LinkButton4.Visible = false; // ViewDepartment
+                        LinkButton1.Visible = true;  // Login
+                        LinkButton2.Visible = true;  // SignUp
+                        LinkButton3.Visible = false; // LogOut
+                        LinkButton7.Visible = false; // HelloUser
+
+                        LinkButton6.Visible = true;  // AdminLogin
+                        LinkButton11.Visible = false; // Analytics
+                        LinkButton12.Visible = false; // DepartmentLogin
+                    }
+                    else if (role == "Student")
+                    {
+                        // User is a logged-in student
+                        LinkButton4.Visible = true;  // ViewDepartment
+                        LinkButton1.Visible = false; // Login
+                        LinkButton2.Visible = false; // SignUp
+                        LinkButton3.Visible = true;  // LogOut
+                        LinkButton7.Visible = true;  // HelloUser
+                        LinkButton7.Text = "Hello " + (Session["FullName"] as string);
+
+                        LinkButton6.Visible = true; // AdminLogin
+                        LinkButton11.Visible = false; // Analytics
+                        LinkButton12.Visible = false; // DepartmentLogin
+                    }
+                    else if (role == "Admin")
+                    {
+                        // User is a logged-in student
+                        LinkButton4.Visible = false;  // ViewDepartment
+                        LinkButton1.Visible = false; // Login
+                        LinkButton2.Visible = false; // SignUp
+                        LinkButton3.Visible = true;  // LogOut
+                        LinkButton7.Visible = true;  // HelloUser
+                        LinkButton7.Text = "Hello " + (role);
+
+                        LinkButton6.Visible = false; // AdminLogin
+                        LinkButton11.Visible = false; // Analytics
+                        LinkButton12.Visible = true; // DepartmentLogin
+                    }
+                    else if (role == "Staff")
+                    {
+                        // User is a logged-in student
+                        LinkButton4.Visible = false;  // ViewDepartment
+                        LinkButton1.Visible = false; // Login
+                        LinkButton2.Visible = false; // SignUp
+                        LinkButton3.Visible = true;  // LogOut
+                        LinkButton7.Visible = true;  // HelloUser
+                        LinkButton7.Text = "Hello " + (role);
+
+                        LinkButton6.Visible = false; // AdminLogin
+                        LinkButton11.Visible = true; // Questions
+                        LinkButton12.Visible = false; // DepartmentLogin
+                        LinkButton12.Visible = false; // DepartmentLogin
+                    }
                 }
-                else if (Session["Role"].Equals("Student") && Session["Login"].Equals("True"))
+                catch (Exception exception)
                 {
-                    // User is a logged-in student
-                    LinkButton4.Visible = true;  // ViewDepartment
-                    LinkButton1.Visible = false; // Login
-                    LinkButton2.Visible = false; // SignUp
-                    LinkButton3.Visible = true;  // LogOut
-                    LinkButton7.Visible = true;  // HelloUser
-                    LinkButton7.Text = "Hello " + Session["FullName"].ToString();
-
-                    LinkButton6.Visible = false; // AdminLogin
-                    LinkButton11.Visible = false; // ArtistLogin
-                    LinkButton12.Visible = false; // DepartmentLogin
+                    // Handle the exception (logging, displaying an error message, etc.)
+                    Console.WriteLine("Error accessing session variables: " + exception.Message);
                 }
-            }
-            catch (Exception exception)
-            {
             }
         }
 
@@ -60,8 +98,8 @@ namespace DepartmentDirect
 
         protected void LinkButton3_Click(object sender, EventArgs e)
         {
-            Session["Role"] = "";
-            Session["Login"] = "";
+            // Clear session variables
+            Session.Clear();
 
             LinkButton4.Visible = false; // ViewDepartment
             LinkButton1.Visible = true;  // Login
@@ -74,6 +112,16 @@ namespace DepartmentDirect
             LinkButton12.Visible = false; // DepartmentLogin
 
             Response.Redirect("home.aspx");
+        }
+
+        protected void LinkButton12_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("publishNotification.aspx");
+        }
+
+        protected void LinkButton11_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("viewDepartments.aspx");
         }
     }
 }

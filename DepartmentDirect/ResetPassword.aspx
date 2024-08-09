@@ -113,8 +113,6 @@
                             </div>
                         </div>
 
-                        <a class="forgotPassword" href="home.aspx">Forgot Password?</a>
-
                     </div>
                 </div>
 

@@ -8,6 +8,8 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
+
 
 namespace DepartmentDirect
 {
@@ -30,7 +32,7 @@ namespace DepartmentDirect
                 try
                 {
                     // Construct the URL with query parameters
-                    string url = $"http://18.226.133.209:9090/departmentdirect/users/login?studentid={studentId}&password={password}";
+                    string url = $"http://3.128.202.148:9090/departmentdirect/users/login?studentid={studentId}&password={password}";
 
                     // Make the GET request
                     HttpResponseMessage response = await client.GetAsync(url);
@@ -40,15 +42,30 @@ namespace DepartmentDirect
                     {
                         if (newpassword_1 == newpassword_2)
                         {
-                            //update the password in the database
-                            UpdatePassword(studentId, newpassword_1);
+                            if (newpassword_1.Length < 8)
+                            {
+                                Label1.Text = "Reset Failed! Password length must be at least 8 characters.";
+                                Label1.ForeColor = System.Drawing.Color.Red;
+                                Label1.Visible = true;
+                                ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 2000);", true);
+                            }
+                            else 
+                            {
+                                //update the password in the database
+                                bool success = await UpdatePasswordAsync(studentId, newpassword_1);
+                                if (success)
+                                {
+                                    Label1.Text = "Reset Successful! Login to Access";
+                                    Label1.ForeColor = System.Drawing.Color.Green;
+                                    Label1.Visible = true;
 
-                            Label1.Text = "Reset Successful! Login to Access";
-                            Label1.ForeColor = System.Drawing.Color.Green;
-                            Label1.Visible = true;
+                                    Response.Redirect("studentLogin.aspx");
+                                }
+                                
+                            }
+                            
 
-
-                            Response.Redirect("studentLogin.aspx");
+                            
                         }
 
 
@@ -58,7 +75,7 @@ namespace DepartmentDirect
                             Label1.ForeColor = System.Drawing.Color.Red;
                             Label1.Visible = true;
                             // Refresh the page after a short delay
-                            ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
+                            ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 2000);", true);
 
                         }
 
@@ -70,7 +87,7 @@ namespace DepartmentDirect
                         Label1.ForeColor = System.Drawing.Color.Red;
                         Label1.Visible = true;
                         // Refresh the page after a short delay
-                        ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 2000);", true);
                     }
                 }
                 catch (Exception ex)
@@ -80,37 +97,49 @@ namespace DepartmentDirect
                     Label1.Visible = true;
 
                     // Refresh the page after a short delay
-                    ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 1200);", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "refresh", "setTimeout(function(){ window.location = 'ResetPassword.aspx'; }, 2000);", true);
                 }
             }
+
+
+
         }
-        private void UpdatePassword(string studentId, string newPassword)
+        private async Task<bool> UpdatePasswordAsync(string studentId, string newPassword)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["DepartmentDirectDB"].ConnectionString;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (HttpClient client = new HttpClient())
             {
-                string query = "UPDATE Users SET Password = @NewPassword WHERE StudentId = @StudentId";
+                var formData = new MultipartFormDataContent();
+                formData.Add(new StringContent(studentId), "StudentID");
+                formData.Add(new StringContent(newPassword), "NewPassword");
 
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    command.Parameters.AddWithValue("@NewPassword", newPassword);
-                    command.Parameters.AddWithValue("@StudentId", studentId);
+                    string url = "http://3.128.202.148:9090/departmentdirect/users/updatePassword";
+                    HttpResponseMessage response = await client.PostAsync(url, formData);
 
-                    try
+                    if (response.IsSuccessStatusCode)
                     {
-                        connection.Open();
-                        command.ExecuteNonQuery();
+                        return true;
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Label1.Text = "Error updating password: " + ex.Message;
+                        string responseString = await response.Content.ReadAsStringAsync();
+                        Label1.Text = "Error updating password: " + responseString;
                         Label1.ForeColor = System.Drawing.Color.Red;
                         Label1.Visible = true;
+                        return false;
                     }
+                }
+                catch (Exception ex)
+                {
+                    Label1.Text = "Error updating password: " + ex.Message;
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                    Label1.Visible = true;
+                    return false;
                 }
             }
         }
+
 
 
     }

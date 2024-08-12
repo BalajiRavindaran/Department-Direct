@@ -96,6 +96,7 @@ namespace DepartmentDirect
             string departmentId = Session["DepartmentId"]?.ToString(); // Or retrieve it from session or other source if needed
             string adminID = Session["AdminId"]?.ToString();
             string message = TextBox1.Text;
+            string category = DropDownList2.SelectedValue.ToString();
 
             if (string.IsNullOrEmpty(studentId))
             {
@@ -119,7 +120,7 @@ namespace DepartmentDirect
                         { "StudentID", studentId },
                         { "DepartmentID", departmentId },
                         { "Message", message },
-                        { "Category", "None" },
+                        { "Category", category },
                         { "StaffID", adminID }
                     };
 

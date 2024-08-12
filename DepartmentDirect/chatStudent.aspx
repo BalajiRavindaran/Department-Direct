@@ -71,9 +71,10 @@
             display: flex;
             width: 100%;
             max-width: 800px;
+            gap: 10px; /* Add spacing between the elements */
         }
 
-        input[type="text"] {
+        input[type="text"], .form-control {
             flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
@@ -82,7 +83,7 @@
 
         .send-button {
             padding: 10px;
-            background-color: #912338;
+            background-color: #800020;
             color: white;
             border: none;
             border-radius: 5px;
@@ -93,11 +94,10 @@
             background-color: #800020;
         }
 
-        .Literal1{
+        .Literal1 {
             text-align: center;
             color: red;
             font-size: 20px;
-        
         }
     </style>
 
@@ -110,6 +110,13 @@
             </div>
             <div class="input-container">
                 <asp:TextBox CssClass="form-control" ID="TextBox1" runat="server" placeholder="Type a message..." />
+                <asp:DropDownList CssClass="form-control" ID="DropDownList2" runat="server">
+                    <asp:ListItem Text="Select" Value="Select"/>
+                    <asp:ListItem Text="Department inquiry" Value="Department inquiry"/>
+                    <asp:ListItem Text="Course Pre-Requsite" Value="Course Pre-Requsite"/>
+                    <asp:ListItem Text="Course Similarities/Differences" Value="Course Similarities/Differences"/>
+                    <asp:ListItem Text="Others" Value="Others"/>
+                </asp:DropDownList>
                 <asp:Button ID="Button1" runat="server" CssClass="send-button" Text="Send" OnClick="SendMessage_Click"/>
             </div>
         </div>

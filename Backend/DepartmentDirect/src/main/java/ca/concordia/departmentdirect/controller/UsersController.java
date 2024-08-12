@@ -82,4 +82,33 @@ public class UsersController {
     }
 
 
+    @PostMapping("updatePassword")
+    public ResponseEntity<Boolean> updatePassword(@RequestParam("StudentID") String studentId,
+                                              @RequestParam("NewPassword") String newPassword)
+    {
+        try{
+            Users user = usersService.findByStudentID(studentId);
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(false);
+            }
+
+            user.setPassword(newPassword);
+            usersService.updateUser(user);
+            return ResponseEntity.ok(true);
+
+        }catch (Exception er)
+        {
+            log.error("Error updating password", er);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
+
+    }
+
+
+
+
+
+    
+
+
 }

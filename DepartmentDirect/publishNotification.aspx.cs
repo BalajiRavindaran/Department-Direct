@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace DepartmentDirect
 {
@@ -19,7 +18,12 @@ namespace DepartmentDirect
 
         protected void ButtonSubmit_Click(object sender, EventArgs e)
         {
+            Label1.Visible = true;
+            Label1.ForeColor = System.Drawing.Color.Black;
+            Label1.Text = "Publishing notification...";
+
             string notificationText = TextBoxNotification.Text;
+            string id = Session["AdminId"] as string;
             string selectedCategory = DropDownListCategories.SelectedValue;
 
             if (string.IsNullOrEmpty(notificationText) || selectedCategory == "Select")
@@ -28,23 +32,37 @@ namespace DepartmentDirect
                 // Show error message or use a validation control
                 return;
             }
+            
 
-            // Code to handle the form submission
-            // For example, sending data to an API or saving to a database
-
-            // Example placeholder code:
-            try
+            // Create HttpClient and send POST request
+            using (HttpClient client = new HttpClient())
             {
-                // Assume we have a method to save notification
-                // SaveNotification(notificationText, selectedCategory);
+                try
+                {
+                    var formData = new MultipartFormDataContent();
+                    formData.Add(new StringContent(id), "AdminID");
+                    formData.Add(new StringContent(notificationText), "Message");
+                    formData.Add(new StringContent(selectedCategory), "Types");
 
-                // Provide feedback to the user
-                // Show a success message or redirect as needed
-            }
-            catch (Exception ex)
-            {
-                // Handle any exceptions
-                // Show an error message
+                    // Use .Result to make it synchronous
+                    HttpResponseMessage response = client.PostAsync("http://3.128.202.148:9090/departmentdirect/nt/send", formData).Result;
+
+                    response.EnsureSuccessStatusCode();
+
+                    // Handle success
+                    //Label1.Text = "Notification published successfully!";
+                }
+                catch (Exception ex)
+                {
+                    // Handle any exceptions
+                    // Example: Label1.Text = $"Error: {ex.Message}";
+                }
+                finally
+                {
+                    // Hide loading indicator
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "Notification was successfully published";
+                }
             }
         }
     }

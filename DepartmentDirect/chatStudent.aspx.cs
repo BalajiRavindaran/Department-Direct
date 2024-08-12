@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
+using System.Web;
 using System.Web.UI;
-using Newtonsoft.Json;
+using System.Web.UI.WebControls;
 
 namespace DepartmentDirect
 {
-    public partial class chatFaculty : System.Web.UI.Page
+    public partial class chatStudent : System.Web.UI.Page
     {
         private readonly string apiUrl = "http://3.128.202.148:9090/departmentdirect/qa/listwithdep";
         private List<MessageResponse> allMessages;
@@ -93,6 +94,7 @@ namespace DepartmentDirect
         {
             string studentId = Session["StudentId"]?.ToString();
             string departmentId = Session["DepartmentId"]?.ToString(); // Or retrieve it from session or other source if needed
+            string adminID = Session["AdminId"]?.ToString();
             string message = TextBox1.Text;
 
             if (string.IsNullOrEmpty(studentId))
@@ -117,12 +119,13 @@ namespace DepartmentDirect
                         { "StudentID", studentId },
                         { "DepartmentID", departmentId },
                         { "Message", message },
-                        { "Category", "None" }
+                        { "Category", "None" },
+                        { "StaffID", adminID }
                     };
 
                     var content = new FormUrlEncodedContent(formData);
 
-                    HttpResponseMessage response = client.PostAsync("http://3.128.202.148:9090/departmentdirect/qa/createstudent", content).Result;
+                    HttpResponseMessage response = client.PostAsync("http://3.128.202.148:9090/departmentdirect/qa/createstaff", content).Result;
 
                     if (response.IsSuccessStatusCode)
                     {

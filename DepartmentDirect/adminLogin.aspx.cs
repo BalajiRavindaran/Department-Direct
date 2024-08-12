@@ -55,6 +55,7 @@ namespace DepartmentDirect
                             Session["FullName"] = user["Role"];
                             Session["Role"] = user["Role"];
                             Session["Login"] = true;
+                            Session["AdminId"] = adminId;
 
                             // Provide feedback
                             Label1.Text = "Login successful! Redirecting to Home";

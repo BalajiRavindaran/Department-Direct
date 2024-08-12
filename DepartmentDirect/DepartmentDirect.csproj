@@ -77,10 +77,10 @@
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\jquery-3.3.1.slim.min.js" />
     <Content Include="bootstrap\js\popper.min.js" />
+    <Content Include="chatStudent.aspx" />
     <Content Include="css\customStyleSheet.css" />
     <Content Include="datatables\css\jquery.dataTables.min.css" />
     <Content Include="datatables\js\jquery.dataTables.min.js" />
-    <Content Include="facultyChats.aspx" />
     <Content Include="fontawesome\css\all.css" />
     <Content Include="fontawesome\css\all.min.css" />
     <Content Include="fontawesome\css\brands.css" />
@@ -2128,7 +2128,6 @@
     <Content Include="fontawesome\svgs\solid\z.svg" />
     <Content Include="home.aspx" />
     <Content Include="publishNotification.aspx" />
-    <Content Include="ResetPassword.aspx" />
     <Content Include="studentLogin.aspx" />
     <Content Include="studentSignup.aspx" />
     <Content Include="viewDepartments.aspx" />
@@ -2156,19 +2155,19 @@
     <Compile Include="adminLogin.aspx.designer.cs">
       <DependentUpon>adminLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="chatStudent.aspx.cs">
+      <DependentUpon>chatStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="chatStudent.aspx.designer.cs">
+      <DependentUpon>chatStudent.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DepartmentDirect.Master.cs">
       <DependentUpon>DepartmentDirect.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="DepartmentDirect.Master.designer.cs">
       <DependentUpon>DepartmentDirect.Master</DependentUpon>
-    </Compile>
-    <Compile Include="facultyChats.aspx.cs">
-      <DependentUpon>facultyChats.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="facultyChats.aspx.designer.cs">
-      <DependentUpon>facultyChats.aspx</DependentUpon>
     </Compile>
     <Compile Include="home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
@@ -2184,13 +2183,6 @@
     </Compile>
     <Compile Include="publishNotification.aspx.designer.cs">
       <DependentUpon>publishNotification.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ResetPassword.aspx.cs">
-      <DependentUpon>ResetPassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ResetPassword.aspx.designer.cs">
-      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="studentLogin.aspx.cs">
       <DependentUpon>studentLogin.aspx</DependentUpon>

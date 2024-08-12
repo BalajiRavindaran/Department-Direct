@@ -101,7 +101,7 @@
                 <asp:Button ID="ButtonSubmit" CssClass="btn signup" runat="server" Text="Submit" OnClick="ButtonSubmit_Click" />
             </div>
             <center>
-                <asp:Label ID="Label1" CssClass="blink" runat="server" Text="Label" Visible="True"></asp:Label>
+                <asp:Label ID="Label1" CssClass="blink" runat="server" Text="Label" Visible="False"></asp:Label>
             </center>
         </div>
     </div>

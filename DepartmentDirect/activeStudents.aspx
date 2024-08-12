@@ -69,8 +69,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <h1 class="title">Active Students</h1>
+        <asp:Label ID="NoStudentsLabel" runat="server" ForeColor="Red" Visible="false">
+            No active students present
+        </asp:Label>
         <div class="table-container">
-            <asp:GridView ID="StudentGridView" runat="server" AutoGenerateColumns="False" CssClass="table">
+            <asp:GridView ID="StudentGridView" runat="server" AutoGenerateColumns="False" CssClass="table" OnRowCommand="StudentGridView_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="StudentID" HeaderText="Student ID" />
                     <asp:BoundField DataField="Name" HeaderText="Name" />
@@ -78,7 +81,7 @@
                         <ItemTemplate>
                             <asp:LinkButton ID="StudentLinkButton" runat="server" CssClass="link-button"
                                 CommandArgument='<%# Eval("StudentID") %>' CommandName="ViewDetails">
-                                <%# Eval("StudentID") %>
+                                View Details
                             </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>

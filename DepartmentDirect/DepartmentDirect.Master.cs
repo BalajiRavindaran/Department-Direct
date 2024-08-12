@@ -53,7 +53,8 @@ namespace DepartmentDirect
                         LinkButton7.Text = "Hello " + (role);
 
                         LinkButton6.Visible = false; // AdminLogin
-                        LinkButton11.Visible = false; // Analytics
+                        LinkButton5.Visible = true; // Analytics
+                        LinkButton11.Visible = false; // DepartmentLogin
                         LinkButton12.Visible = true; // DepartmentLogin
                     }
                     else if (role == "Staff")
@@ -122,6 +123,11 @@ namespace DepartmentDirect
         protected void LinkButton11_Click(object sender, EventArgs e)
         {
             Response.Redirect("viewDepartments.aspx");
+        }
+
+        protected void LinkButton5_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("adminAnalytics.aspx");
         }
     }
 }

@@ -81,6 +81,8 @@
                             <asp:LinkButton class="footerlinks" ID="LinkButton11" runat="server" Visible="False" OnClick="LinkButton11_Click">Active Questions</asp:LinkButton>
                             &nbsp;
                             <asp:LinkButton class="footerlinks" ID="LinkButton12" runat="server" Visible="False" OnClick="LinkButton12_Click">Publish Notification</asp:LinkButton>
+                            &nbsp;
+                            <asp:LinkButton class="footerlinks" ID="LinkButton5" runat="server" Visible="False" OnClick="LinkButton5_Click">Analytics</asp:LinkButton>
                         </p>
                     </div>
                 </div>

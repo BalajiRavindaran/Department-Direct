@@ -40,4 +40,10 @@ public class QuestionAnswer {
     @Column(name = "Datetime")
     private Date datetime;
 
+    @Column(name = "Category")
+    private String category;
+
+    @Column(name = "Status")
+    private String status;
+
 }

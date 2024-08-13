@@ -27,8 +27,8 @@ public class Users {
     private String password;
     @Column(name = "Email")
     private String email;
-    @Column(name = "Isstudent")
-    private boolean isstudent;
+    @Column(name = "Role")
+    private String role;
     @Column(name = "StudentID")
     private String studentId;
     @Column(name = "Notifications")

@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -25,5 +27,25 @@ public class UsersServiceImpl implements UsersService{
     @Override
     public Users findByStudentID(String studentID) {
         return usersRepository.findByStudentId(studentID);
+    }
+
+    @Override
+    public Users findByID(int id) {
+        return usersRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Users> findByNotificationsContains(String notifications) {
+        return usersRepository.findByNotificationsContains(notifications);
+    }
+
+    @Override
+    public List<Users> findAll() {
+        return usersRepository.findAll();
+    }
+
+    @Override
+    public Users changePassword(Users users) {
+        return usersRepository.save(users);
     }
 }

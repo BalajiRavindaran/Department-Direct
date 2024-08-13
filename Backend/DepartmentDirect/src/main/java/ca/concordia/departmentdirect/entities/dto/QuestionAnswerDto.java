@@ -2,6 +2,7 @@ package ca.concordia.departmentdirect.entities.dto;
 
 import ca.concordia.departmentdirect.entities.QuestionAnswer;
 import ca.concordia.departmentdirect.entities.UserEvent;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -24,8 +25,12 @@ public class QuestionAnswerDto {
     private int id;
     private String studentId;
     private int departmentId;
+    private int staffId;
     private String message;
     private Date datetime;
+    private String category;
+    private String status;
+    private String role;
 
     public QuestionAnswer toModel() {
         QuestionAnswer questionAnswer = QuestionAnswer.builder().build();
@@ -37,8 +42,12 @@ public class QuestionAnswerDto {
         try {
             QuestionAnswerDto dto = QuestionAnswerDto.builder().build();
             BeanUtils.copyProperties(questionAnswer, dto);
-            dto.setStudentId(questionAnswer.getFutureStudent().getStudentId());
+            if (questionAnswer.getFutureStudent()!= null)
+                dto.setStudentId(questionAnswer.getFutureStudent().getStudentId());
+            if (questionAnswer.getStaff() != null)
+                dto.setStaffId(questionAnswer.getStaff().getId());
             dto.setDepartmentId(questionAnswer.getDepartment().getId());
+            dto.setRole(questionAnswer.getStaff() == null? "Student": "Staff");
             return dto;
         }catch (Exception er)
         {

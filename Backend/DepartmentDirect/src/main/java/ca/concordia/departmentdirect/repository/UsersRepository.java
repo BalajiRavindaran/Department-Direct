@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @JsonSerialize
 @JsonNaming
@@ -15,4 +17,5 @@ import org.springframework.stereotype.Repository;
 public interface UsersRepository extends JpaRepository<Users, Integer> {
     Users findByEmail(String email);
     Users findByStudentId(String studentId);
+    List<Users> findByNotificationsContains(String notifications);
 }

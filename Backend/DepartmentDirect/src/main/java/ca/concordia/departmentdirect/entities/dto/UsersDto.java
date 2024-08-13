@@ -25,6 +25,7 @@ public class UsersDto {
     private String notifications;
     private String dateOfBirth;
     private String password;
+    private String role;
 
 
     public static UsersDto fromModel(Users users) {
